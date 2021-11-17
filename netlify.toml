@@ -1,7 +1,7 @@
 [build.environment]
   NPM_FLAGS = "--prefix=/dev/null --force"
   NODE_VERSION = "16.11.1"
-  NPM_VERSION = "7.24.2"
+  NPM_VERSION = "6.14.15"
 
 [build]
   publish = "dist"
