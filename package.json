@@ -1,0 +1,30 @@
+{
+  "name": "xstate-test",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "format": "prettier --ignore-path .gitignore --plugin-search-dir=. --write ."
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
+    "@tsconfig/svelte": "^2.0.1",
+    "prettier": "^2.4.1",
+    "prettier-plugin-svelte": "^2.5.0",
+    "svelte": "^3.37.0",
+    "svelte-check": "^2.1.0",
+    "svelte-preprocess": "^4.7.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4",
+    "vite-plugin-windicss": "^1.5.1",
+    "windicss": "^3.2.1"
+  },
+  "dependencies": {
+    "@xstate/svelte": "^0.2.0",
+    "xstate": "^4.26.0"
+  }
+}
