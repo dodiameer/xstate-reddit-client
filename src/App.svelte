@@ -8,7 +8,7 @@
 
   const onChange = (e) => send({ type: "SELECT", name: e.target.value });
 
-  $: subreddit = $state.context.subreddit;
+  $: ({ subreddit } = $state.context);
 </script>
 
 <main class="container space-y-4 py-6">
@@ -26,6 +26,6 @@
     {/each}
   </select>
   {#if subreddit}
-    <Subreddit name={subreddit} />
+    <Subreddit service={subreddit} />
   {/if}
 </main>

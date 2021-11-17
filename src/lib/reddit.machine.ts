@@ -1,4 +1,5 @@
-import { assign, createMachine } from "xstate";
+import { assign, createMachine, spawn } from "xstate";
+import { createSubredditMachine } from "./subreddit.machine";
 
 export const redditMachine = createMachine({
   id: "reddit",
@@ -10,16 +11,25 @@ export const redditMachine = createMachine({
   context: {
     subreddits: {},
     subreddit: null,
-    posts: null,
   },
   on: {
     SELECT: {
       target: ".selected",
-      actions: assign({
-        subreddit: (_context, event) => {
-          // @ts-ignore
-          return event.name;
-        },
+      actions: assign((context: any, event: any) => {
+        let subreddit = context.subreddits[event.name];
+
+        if (subreddit) {
+          return { ...context, subreddit };
+        }
+
+        subreddit = spawn(createSubredditMachine(event.name));
+        return {
+          subreddits: {
+            ...context.subreddits,
+            [event.name]: subreddit,
+          },
+          subreddit,
+        };
       }),
     },
   },
