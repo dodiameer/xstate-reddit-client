@@ -4,7 +4,7 @@
   import Subreddit from "./lib/Subreddit.svelte";
 
   const { state, send } = useMachine(redditMachine);
-  const subreddits = ["sveltejs", "reactjs", "programming"];
+  const subreddits = ["sveltejs", "reactjs", "vuejs", "programming", "webdev"];
 
   const onChange = (e) => send({ type: "SELECT", name: e.target.value });
 
