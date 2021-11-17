@@ -1,14 +1,14 @@
 <script lang="ts">
   import { redditMachine } from "./lib/reddit.machine";
   import { useMachine } from "@xstate/svelte";
+  import Subreddit from "./lib/Subreddit.svelte";
 
   const { state, send } = useMachine(redditMachine);
   const subreddits = ["sveltejs", "reactjs", "programming"];
 
   const onChange = (e) => send({ type: "SELECT", name: e.target.value });
 
-  $: posts = $state.context.posts;
-  $: console.log(posts?.slice(0, 10));
+  $: subreddit = $state.context.subreddit;
 </script>
 
 <main class="container space-y-4 py-6">
@@ -25,24 +25,7 @@
       <option value={subreddit}>/r/{subreddit}</option>
     {/each}
   </select>
-  <h2 class="font-semibold text-lg">
-    {$state.matches("idle")
-      ? "Select a subreddit"
-      : `Browsing /r/${$state.context.subreddit}`}
-  </h2>
-  {#if $state.matches({ selected: "loading" })}
-    <p>Loading...</p>
-  {:else if $state.matches({ selected: "failed" })}
-    <p>Error while loading.</p>
-  {:else if $state.matches({ selected: "loaded" })}
-    <ul class="space-y-1 list-circle list-inside">
-      {#each posts as post}
-        <li>
-          <a class="text-orange-600 hover:text-blue-600" href={post.url}>
-            {@html post.title}
-          </a>
-        </li>
-      {/each}
-    </ul>
+  {#if subreddit}
+    <Subreddit name={subreddit} />
   {/if}
 </main>
